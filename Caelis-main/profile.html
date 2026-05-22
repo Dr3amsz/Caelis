@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Saya - Caelis</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        .profile-header-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        .profile-cover {
+            height: 200px;
+            background: linear-gradient(135deg, #4A9FC4 0%, #7FC3DC 100%);
+        }
+        
+        .profile-info-new {
+            padding: 0 30px 30px 30px;
+        }
+
+        .profile-img-wrapper {
+            margin-top: -75px; 
+            width: 150px;
+            position: relative;
+            flex-shrink: 0;
+            z-index: 2;
+        }
+        
+        .profile-img-large {
+            width: 150px !important;
+            height: 150px !important;
+            border: 5px solid white !important;
+            background: white;
+            position: relative !important;
+            left: auto !important;
+            right: auto !important;
+            bottom: auto !important;
+            margin: 0 !important;
+        }
+        
+        /* 👇 PERBAIKAN POSISI KAMERA: Nempel di sudut KANAN BAWAH foto 👇 */
+        .profile-img-edit {
+            position: absolute !important;
+            bottom: 55px !important;  /* Jarak dari bawah foto agar pas di garis */
+            right: 5px !important;   /* Jarak dari kanan agar nempel di sudut kanan foto */
+            left: auto !important;   /* Matikan pengaturan kiri yang bikin error */
+            margin: 0 !important;
+            padding: 8px !important; 
+            border-radius: 50% !important; /* Membuatnya bulat sempurna */
+            background-color: white !important;
+            border: 1px solid #ddd !important;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1) !important;
+            z-index: 20;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+    </head>
+<body>
+    
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm" style="background: rgba(74, 159, 196, 0.95); backdrop-filter: blur(10px);">
+        <div class="container">
+            <a class="navbar-brand text-white fw-bold d-flex align-items-center cute-hover" href="feed.html">
+                <i class="bi bi-cloud-fill me-2 fs-3"></i>
+                <span class="brand-text">Caelis</span>
+            </a>
+            
+            <button class="navbar-toggler border-0 cute-hover" type="button" data-bs-toggle="collapse" data-bs-target="#cuteNavbar" style="outline: none;">
+                <i class="bi bi-list text-white fs-2"></i>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="cuteNavbar">
+                <ul class="navbar-nav ms-auto align-items-center gap-3">
+                    <li class="nav-item">
+                        <a class="nav-link text-white cute-hover d-flex align-items-center" href="feed.html" title="Beranda">
+                            <i class="bi bi-house-door-fill fs-4"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white cute-hover d-flex align-items-center" href="#" data-bs-toggle="modal" data-bs-target="#searchModal" title="Cari Teman">
+                            <i class="bi bi-search fs-4"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white cute-hover d-flex align-items-center" href="profile.html" title="Profil Saya">
+                            <i class="bi bi-person-circle fs-4"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white cute-hover d-flex align-items-center" href="#" onclick="handleLogout(event)" title="Keluar">
+                            <i class="bi bi-box-arrow-right text-danger fs-4"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="clouds-container">
+        <div class="cloud cloud-1">☁️</div>
+        <div class="cloud cloud-2">☁️</div>
+        <div class="cloud cloud-3">☁️</div>
+    </div>
+
+    <div class="main-container">
+        <div id="profilePage" class="page-content active">
+            <div class="container py-5">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="profile-header-card mb-4">
+                            
+                            <div class="profile-cover"></div>
+                            
+                            <div class="profile-info-new">
+                                <div class="d-flex flex-column flex-md-row gap-4">
+                                    
+                                    <div class="profile-img-wrapper">
+                                        <img src="" alt="Profile" class="profile-img-large rounded-circle" id="profileImg">
+                                        
+                                        <button class="btn btn-sm btn-light profile-img-edit" onclick="document.getElementById('profilePhotoInput').click()">
+                                            <i class="bi bi-camera-fill text-dark"></i>
+                                        </button>
+                                        
+                                        <input type="file" id="profilePhotoInput" accept="image/*" style="display: none;" onchange="uploadProfilePhoto(event)">
+                                    </div>
+                                    
+                                    <div class="flex-grow-1 pt-3">
+                                        <h3 class="fw-bold text-dark mb-0" id="profileName">User Name</h3>
+                                        <p class="text-muted small mb-2" id="profileEmail">user@email.com</p>
+                                        
+                                        <div class="d-flex gap-3 mb-2 small text-muted">
+                                            <span><strong id="totalFollowers" class="text-dark fs-6">0</strong> Pengikut</span>
+                                            <span><strong id="totalFollowing" class="text-dark fs-6">0</strong> Mengikuti</span>
+                                        </div>
+
+                                        <p class="text-muted small mb-0" style="line-height: 1.4;" id="profileBio">Belum ada bio</p>
+                                    </div>
+                                    
+                                    <div class="pt-3">
+                                        <button class="btn btn-outline-primary btn-sm rounded-pill px-4 fw-bold" onclick="openEditProfileModal()">
+                                            <i class="bi bi-pencil-fill me-1 small"></i> Edit Profil
+                                        </button>
+                                    </div>
+
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                        <div class="profile-tabs mb-4">
+                            <h5 class="fw-bold text-muted"><i class="bi bi-card-text me-2"></i>Postingan Saya</h5>
+                        </div>
+                        <div id="profilePostsContainer"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <div id="otherProfilePage" class="page-content">
+    <div class="container py-4" style="max-width: 600px; margin: auto;">
+        
+        <button class="btn btn-light mb-4 shadow-sm rounded-pill px-3" onclick="showPage('feed')">
+            <i class="bi bi-arrow-left"></i> Kembali
+        </button>
+
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-body text-center" id="otherProfileHeader">
+                <p>Memuat profil...</p>
+            </div>
+        </div>
+
+        <h6 class="fw-bold mb-3 text-muted border-bottom pb-2">Postingan</h6>
+        <div id="otherProfilePosts"></div>
+
+    </div>
+</div>
+
+    <div class="modal fade" id="editProfileModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header border-0 pb-0">
+                    <h5 class="modal-title fw-bold">Edit Profil</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editProfileForm">
+                        <div class="mb-3">
+                            <label class="form-label text-muted small">Nama</label>
+                            <input type="text" class="form-control" id="editName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label text-muted small">Bio</label>
+                            <textarea class="form-control" id="editBio" rows="3" placeholder="Ceritakan tentang diri Anda..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary rounded-pill w-100 fw-bold">Simpan Perubahan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="searchModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header border-0 pb-0">
+                    <div class="input-group shadow-sm" style="border-radius: 50px; overflow: hidden;">
+                        <span class="input-group-text bg-light border-0 px-3"><i class="bi bi-search text-muted"></i></span>
+                        <input type="text" class="form-control bg-light border-0 py-2 shadow-none" id="navbarSearchInput" placeholder="Ketik nama teman..." onkeyup="performNavbarSearch()" style="font-size: 1rem;">
+                    </div>
+                    <button type="button" class="btn-close ms-3" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <h6 class="fw-bold mb-3 text-muted" style="font-size: 0.9rem;">Hasil Pencarian</h6>
+                    <div id="searchResultsContainer"><p class="text-muted small text-center my-4">Ketikkan nama di atas untuk mencari teman.</p></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

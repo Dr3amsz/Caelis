@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beranda - Caelis</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm" style="background: rgba(74, 159, 196, 0.95); backdrop-filter: blur(10px);">
+        <div class="container">
+            <a class="navbar-brand text-white fw-bold d-flex align-items-center cute-hover" href="feed.html">
+                <i class="bi bi-cloud-fill me-2 fs-3"></i>
+                <span class="brand-text">Caelis</span>
+            </a>
+            
+            <button class="navbar-toggler border-0 cute-hover" type="button" data-bs-toggle="collapse" data-bs-target="#cuteNavbar" style="outline: none;">
+                <i class="bi bi-list text-white fs-2"></i>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="cuteNavbar">
+                <ul class="navbar-nav ms-auto align-items-center gap-3">
+                    
+                    <li class="nav-item">
+                        <a class="nav-link text-white cute-hover d-flex align-items-center" href="feed.html" title="Beranda">
+                            <i class="bi bi-house-door-fill fs-4"></i>
+                            <span class="d-lg-none fw-bold ms-2">Beranda</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link text-white cute-hover d-flex align-items-center" href="#" data-bs-toggle="modal" data-bs-target="#searchModal" title="Cari Teman">
+                            <i class="bi bi-search fs-4"></i>
+                            <span class="d-lg-none fw-bold ms-2">Cari Teman</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link text-white cute-hover d-flex align-items-center" href="profile.html" title="Profil Saya">
+                            <i class="bi bi-person-circle fs-4"></i>
+                            <span class="d-lg-none fw-bold ms-2">Profil Saya</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link text-white cute-hover d-flex align-items-center" href="#" onclick="handleLogout(event)" title="Keluar">
+                            <i class="bi bi-box-arrow-right text-danger fs-4"></i>
+                            <span class="d-lg-none fw-bold ms-2 text-danger">Keluar</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="clouds-container">
+        <div class="cloud cloud-1">☁️</div>
+        <div class="cloud cloud-2">☁️</div>
+        <div class="cloud cloud-3">☁️</div>
+        <div class="cloud cloud-4">☁️</div>
+    </div>
+
+    <div class="main-container">
+        <div id="feedPage" class="page-content active"> 
+            <div class="container py-5">
+                <div class="row">
+                    
+                    <div class="col-md-3 d-none d-md-block">
+                        <div class="sidebar-card">
+                            <div class="text-center mb-3">
+                                <img src="" alt="Profile" class="profile-img-sidebar" id="sidebarProfileImg">
+                                <h5 class="mt-3 mb-1 fw-bold" id="sidebarUserName">User Name</h5>
+                                <p class="text-muted small" id="sidebarUserEmail">user@email.com</p>
+                            </div>
+                            <hr>
+                            <div class="sidebar-stats">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>📝 Postingan</span>
+                                    <strong id="totalPosts">0</strong>
+                                </div>
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>👥 Pengikut</span>
+                                    <strong id="totalFollowers">0</strong>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span>👤 Mengikuti</span>
+                                    <strong id="totalFollowing">0</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="post-card mb-4">
+                            <div class="d-flex gap-3 mb-3">
+                                <img src="" alt="Profile" class="profile-img-small" id="createPostProfileImg">
+                                <input type="text" class="form-control create-post-input" placeholder="Apa yang Anda pikirkan? 💭" onclick="openCreatePostModal('text')">
+                            </div>
+                            
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-light flex-fill rounded-pill py-2" onclick="openCreatePostModal('image')" style="font-weight: 600; color: #555;">
+                                    <i class="bi bi-image text-success me-2"></i> Foto
+                                </button>
+                                <button class="btn btn-light flex-fill rounded-pill py-2" onclick="openCreatePostModal('text')" style="font-weight: 600; color: #555;">
+                                    <i class="bi bi-pencil-square text-primary me-2"></i> Status
+                                </button>
+                            </div>
+                            </div>
+                        <div id="postsContainer"></div>
+                    </div>
+                    
+                    <div class="col-md-3 d-none d-md-block">
+                        <div class="sidebar-card">
+                            <h6 class="mb-3 fw-bold"><i class="bi bi-people-fill text-primary me-2"></i>Saran Teman</h6>
+                            <div id="suggestedUsersContainer"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="createPostModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header border-0 pb-0">
+                    <h5 class="modal-title fw-bold">Buat Postingan</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="createPostForm">
+                        <div class="mb-3">
+                            <textarea class="form-control border-0" style="resize: none; font-size: 1.2rem;" id="postContent" rows="4" placeholder="Apa yang ingin Anda bagikan? ✨" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="btn btn-light rounded-pill px-3">
+                                <i class="bi bi-image text-success me-1"></i> Tambah Foto
+                                <input type="file" class="d-none" id="postImage" accept="image/*">
+                            </label>
+                            <div id="imagePreview" class="mt-3"></div>
+                        </div>
+                        <button type="submit" class="btn btn-primary rounded-pill w-100 fw-bold">🚀 Posting</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <div id="otherProfilePage" class="page-content">
+    <div class="container py-4" style="max-width: 600px; margin: auto;">
+        
+        <button class="btn btn-light mb-4 shadow-sm rounded-pill px-3" onclick="showPage('feed'); document.getElementById('otherProfilePage').style.display = 'none'; document.getElementById('feedPage').style.display = 'block';">
+            <i class="bi bi-arrow-left"></i> Kembali
+        </button>
+
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-body text-center" id="otherProfileHeader">
+                <p>Memuat profil...</p>
+            </div>
+        </div>
+
+        <h6 class="fw-bold mb-3 text-muted border-bottom pb-2">Postingan</h6>
+        <div id="otherProfilePosts"></div>
+
+    </div>
+</div>
+
+    <div class="modal fade" id="searchModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header border-0 pb-0">
+                    <div class="input-group shadow-sm" style="border-radius: 50px; overflow: hidden;">
+                        <span class="input-group-text bg-light border-0 px-3">
+                            <i class="bi bi-search text-muted"></i>
+                        </span>
+                        <input type="text" class="form-control bg-light border-0 py-2 shadow-none" id="navbarSearchInput" placeholder="Ketik nama teman..." onkeyup="performNavbarSearch()" style="font-size: 1rem;">
+                    </div>
+                    <button type="button" class="btn-close ms-3" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <h6 class="fw-bold mb-3 text-muted" style="font-size: 0.9rem;">Hasil Pencarian</h6>
+                    <div id="searchResultsContainer">
+                        <p class="text-muted small text-center my-4">Ketikkan nama di atas untuk mulai mencari teman.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

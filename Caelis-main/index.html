@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caelis - Bagikan Momenmu</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm" id="mainNavbar" style="background: rgba(74, 159, 196, 0.95); backdrop-filter: blur(10px);">
+        <div class="container">
+            <a class="navbar-brand text-white fw-bold d-flex align-items-center cute-hover" href="#" onclick="showPage('landing')">
+                <i class="bi bi-cloud-fill me-2 fs-3"></i>
+                <span class="brand-text">Caelis</span>
+            </a>
+            
+            <button class="navbar-toggler border-0 cute-hover" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="bi bi-list text-white fs-2"></i>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center gap-3">
+                    
+                    <li class="nav-item">
+                        <a class="nav-link text-white cute-hover d-flex align-items-center" href="feed.html" title="Beranda">
+                            <i class="bi bi-house-door-fill fs-4"></i>
+                            <span class="d-lg-none fw-bold ms-2">Beranda</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link text-white cute-hover d-flex align-items-center" href="#" data-bs-toggle="modal" data-bs-target="#searchModal" title="Cari Teman">
+                            <i class="bi bi-search fs-4"></i>
+                            <span class="d-lg-none fw-bold ms-2">Cari Teman</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link text-white cute-hover d-flex align-items-center" href="profile.html" title="Profil Saya">
+                            <i class="bi bi-person-circle fs-4"></i>
+                            <span class="d-lg-none fw-bold ms-2">Profil Saya</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link text-white cute-hover d-flex align-items-center" href="#" onclick="handleLogout(event)" title="Keluar">
+                            <i class="bi bi-box-arrow-right text-danger fs-4"></i>
+                            <span class="d-lg-none fw-bold ms-2 text-danger">Keluar</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="clouds-container">
+        <div class="cloud cloud-1">☁️</div>
+        <div class="cloud cloud-2">☁️</div>
+        <div class="cloud cloud-3">☁️</div>
+        <div class="cloud cloud-4">☁️</div>
+    </div>
+
+    <div class="main-container">
+        
+        <div id="landingPage" class="page-content active">
+            <div class="container">
+                <div class="row align-items-center min-vh-100">
+                    <div class="col-lg-6 text-center text-lg-start mb-5 mb-lg-0">
+                        <div class="landing-content">
+                            <h1 class="display-3 fw-bold mb-4 animate-fade-in text-dark">
+                                Selamat Datang di <span class="gradient-text">Caelis</span>
+                            </h1>
+                            <p class="lead mb-4 animate-fade-in-delay text-dark">
+                                Terhubung dengan teman, berbagi momen, dan ciptakan kenangan bersama di platform sosial media modern yang dibuat untuk Anda.
+                            </p>
+                            <div class="d-flex gap-3 justify-content-center justify-content-lg-start animate-fade-in-delay-2">
+                                <button class="btn btn-primary btn-lg rounded-pill" onclick="showPage('register')">
+                                    Mulai Sekarang 
+                                </button>
+                                <button class="btn btn-outline-dark btn-lg rounded-pill" onclick="showPage('login')">
+                                    Masuk
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="landing-illustration">
+                            <div class="illustration-card">
+                                <div class="floating-element">🌤️</div>
+                                <div class="floating-element delay-1">⭐</div>
+                                <div class="floating-element delay-2">💭</div>
+                                <div class="floating-element delay-3">🎈</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="loginPage" class="page-content">
+            <div class="container">
+                <div class="row justify-content-center align-items-center min-vh-100">
+                    <div class="col-md-6 col-lg-5">
+                        <div class="auth-card">
+                            <div class="text-center mb-4">
+                                <i class="bi bi-shield-lock-fill text-primary" style="font-size: 3rem;"></i>
+                                <h2 class="fw-bold mt-2">Masuk ke Akun</h2>
+                                <p class="text-muted">Selamat datang kembali!</p>
+                            </div>
+                                <form id="loginForm">
+                                    <div class="mb-3">
+                                        <label class="form-label">Email</label>
+                                        <div class="input-icon">
+                                            <i class="bi bi-envelope-fill icon text-muted"></i>
+                                            <input type="email" class="form-control" id="loginEmail" name="email" required placeholder="nama@email.com">
+                                        </div>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="form-label">Password</label>
+                                        <div class="input-icon">
+                                            <i class="bi bi-lock-fill icon text-muted"></i>
+                                            <input type="password" class="form-control" id="loginPassword" name="password" required placeholder="Masukkan password">
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary rounded-pill w-100 mb-3 fw-bold">
+                                        Masuk 🚀
+                                    </button>
+                                <div class="text-center">
+                                    <span class="text-muted">Belum punya akun? </span>
+                                    <a href="#" onclick="showPage('register')" class="text-decoration-none fw-bold">Daftar di sini</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="registerPage" class="page-content">
+            <div class="container">
+                <div class="row justify-content-center align-items-center min-vh-100">
+                    <div class="col-md-6 col-lg-5">
+                        <div class="auth-card">
+                            <div class="text-center mb-4">
+                                <i class="bi bi-stars text-warning" style="font-size: 3rem;"></i>
+                                <h2 class="fw-bold mt-2">Buat Akun Baru</h2>
+                                <p class="text-muted">Bergabunglah bersama kami di Caelis!</p>
+                            </div>
+<form id="registerForm">
+    <div class="mb-3">
+        <label class="form-label">Nama Lengkap</label>
+        <div class="input-icon">
+            <i class="bi bi-person-fill icon text-muted"></i>
+            <input type="text" class="form-control" id="registerName" name="name" required placeholder="Nama Anda">
+        </div>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Email</label>
+        <div class="input-icon">
+            <i class="bi bi-envelope-fill icon text-muted"></i>
+            <input type="email" class="form-control" id="registerEmail" name="email" required placeholder="nama@email.com">
+        </div>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Password</label>
+        <div class="input-icon">
+            <i class="bi bi-lock-fill icon text-muted"></i>
+            <input type="password" class="form-control" id="registerPassword" name="password" required placeholder="Minimal 6 karakter">
+        </div>
+    </div>
+    <div class="mb-4">
+        <label class="form-label">Konfirmasi Password</label>
+        <div class="input-icon">
+            <i class="bi bi-lock-fill icon text-muted"></i>
+            <input type="password" class="form-control" id="registerConfirmPassword" required placeholder="Ulangi password">
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary rounded-pill w-100 mb-3 fw-bold">
+        Daftar Sekarang 🎉
+    </button>
+                                <div class="text-center">
+                                    <span class="text-muted">Sudah punya akun? </span>
+                                    <a href="#" onclick="showPage('login')" class="text-decoration-none fw-bold">Masuk di sini</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="feedPage" class="page-content">
+            <div class="container py-5">
+                <div class="row">
+                    <div class="col-md-3 d-none d-md-block">
+                        <div class="sidebar-card">
+                            <div class="text-center mb-3">
+                                <img src="" alt="Profile" class="profile-img-sidebar" id="sidebarProfileImg">
+                                <h5 class="mt-3 mb-1 fw-bold" id="sidebarUserName">User Name</h5>
+                                <p class="text-muted small" id="sidebarUserEmail">user@email.com</p>
+                            </div>
+                            <hr>
+                            <div class="sidebar-stats">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>📝 Postingan</span>
+                                    <strong id="totalPosts">0</strong>
+                                </div>
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>👥 Pengikut</span>
+                                    <strong id="totalFollowers">0</strong>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span>👤 Mengikuti</span>
+                                    <strong id="totalFollowing">0</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="post-card mb-4">
+                            <div class="d-flex gap-3 mb-3">
+                                <img src="" alt="Profile" class="profile-img-small" id="createPostProfileIm">
+                                <input type="text" class="form-control create-post-input" placeholder="Apa yang Anda pikirkan? 💭" onclick="openCreatePostModal('text')">
+                            </div>
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-light flex-fill rounded-pill" onclick="openCreatePostModal('image')">
+                                    <i class="bi bi-image text-success me-1"></i> Foto
+                                </button>
+                                <button class="btn btn-light flex-fill rounded-pill" onclick="openCreatePostModal('text')">
+                                    <i class="bi bi-pencil-square text-primary me-1"></i> Status
+                                </button>
+                            </div>
+                        </div>
+
+                        <div id="postsContainer"></div>
+                    </div>
+
+                    <div class="col-md-3 mt-4 mt-md-0">
+                        <div class="sidebar-card">
+                            <h6 class="mb-3 fw-bold">
+                                <i class="bi bi-people-fill text-primary me-2"></i>Saran Teman
+                            </h6>
+                            <div id="suggestedUsersContainer"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        <div id="profilePage" class="page-content">
+            <div class="container py-5">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="profile-header-card mb-4">
+                            <div class="profile-cover"></div>
+                            <div class="profile-info">
+                                <div class="position-relative">
+                                    <img src="" alt="Profile" class="profile-img-large" id="profileImg">
+                                    <button class="btn btn-sm btn-light profile-img-edit" onclick="document.getElementById('profilePhotoInput').click()">
+                                        <i class="bi bi-camera-fill"></i>
+                                    </button>
+                                    <input type="file" id="profilePhotoInput" accept="image/*" style="display: none;" onchange="uploadProfilePhoto(event)">
+                                </div>
+                                <div class="profile-details">
+                                    <h3 class="mb-1 fw-bold" id="profileName">User Name</h3>
+                                    <p class="text-muted mb-2" id="profileEmail">user@email.com</p>
+                                    
+                                    <div class="d-flex gap-3 mb-3">
+                                        <span><strong id="profileFollowersCount">0</strong> Pengikut</span>
+                                        <span><strong id="profileFollowingCount">0</strong> Mengikuti</span>
+                                    </div>
+
+                                    <p class="mb-3" id="profileBio">Belum ada bio</p>
+                                    <button class="btn btn-outline-primary rounded-pill px-4" onclick="openEditProfileModal()">
+                                        <i class="bi bi-pencil-fill me-1"></i> Edit Profil
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+            
+                        <div class="profile-tabs mb-4">
+                            <h5 class="fw-bold"><i class="bi bi-card-text me-2"></i>Postingan Saya</h5>
+                        </div>
+                        <div id="profilePostsContainer">
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="otherProfilePage" class="page-content">
+    <div class="container py-4" style="max-width: 600px; margin: auto;">
+        
+        <button class="btn btn-light mb-4 shadow-sm rounded-pill px-3" onclick="showPage('feed')">
+            <i class="bi bi-arrow-left"></i> Kembali
+        </button>
+
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-body text-center" id="otherProfileHeader">
+                <p>Memuat profil...</p>
+            </div>
+        </div>
+
+        <h6 class="fw-bold mb-3 text-muted border-bottom pb-2">Postingan</h6>
+        <div id="otherProfilePosts"></div>
+
+    </div>
+</div>
+
+    <div class="modal fade" id="createPostModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header border-0 pb-0">
+                    <h5 class="modal-title fw-bold">Buat Postingan</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="createPostForm">
+                        <div class="mb-3">
+                            <textarea class="form-control border-0" style="resize: none; font-size: 1.2rem;" id="postContent" rows="4" placeholder="Apa yang ingin Anda bagikan? ✨" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="btn btn-light rounded-pill px-3">
+                                <i class="bi bi-image text-success me-1"></i> Tambah Foto
+                                <input type="file" class="d-none" id="postImage" accept="image/*">
+                            </label>
+                            <div id="imagePreview" class="mt-3"></div>
+                        </div>
+                        <button type="submit" class="btn btn-primary rounded-pill w-100 fw-bold">
+                            Posting
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="editProfileModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header border-0 pb-0">
+                    <h5 class="modal-title fw-bold">Edit Profil</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editProfileForm">
+                        <div class="mb-3">
+                            <label class="form-label text-muted small">Nama</label>
+                            <input type="text" class="form-control" id="editName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label text-muted small">Bio</label>
+                            <textarea class="form-control" id="editBio" rows="3" placeholder="Ceritakan tentang diri Anda..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary rounded-pill w-100 fw-bold">
+                            Simpan Perubahan
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="searchModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header border-0 pb-0">
+                    <div class="input-group shadow-sm" style="border-radius: 50px; overflow: hidden;">
+                        <span class="input-group-text bg-light border-0 px-3">
+                            <i class="bi bi-search text-muted"></i>
+                        </span>
+                        <input type="text" class="form-control bg-light border-0 py-2 shadow-none" id="navbarSearchInput" placeholder="Ketik nama teman..." onkeyup="performNavbarSearch()" style="font-size: 1rem;">
+                    </div>
+                    <button type="button" class="btn-close ms-3" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <h6 class="fw-bold mb-3 text-muted" style="font-size: 0.9rem;">Hasil Pencarian</h6>
+                    <div id="searchResultsContainer">
+                        <p class="text-muted small text-center my-4">Ketikkan nama di atas untuk mulai mencari teman.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const originalShowAuth = window.showAuthenticatedUI;
+            const originalShowUnauth = window.showUnauthenticatedUI;
+            
+            if(typeof showAuthenticatedUI === 'function') {
+                window.showAuthenticatedUI = function() {
+                    originalShowAuth();
+                    const searchNav = document.getElementById('navSearch');
+                    if(searchNav) searchNav.classList.remove('d-none');
+                };
+                window.showUnauthenticatedUI = function() {
+                    originalShowUnauth();
+                    const searchNav = document.getElementById('navSearch');
+                    if(searchNav) searchNav.classList.add('d-none');
+                };
+            }
+        });
+    </script>
+</body>
+</html>
