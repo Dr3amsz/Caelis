@@ -21,7 +21,7 @@ Caelis adalah sebuah platform media sosial berbasis web yang dirancang untuk mem
 
 ## Struktur Project dan Penjelasan
 Berikut adalah susunan struktur direktori proyek Caelis beserta penjelasan fungsi komponen penting di dalamnya:
-
+```
 Caelis-main/
 ├── assets/                  # Menyimpan aset pustaka eksternal untuk mendukung antarmuka
 │   ├── css/                 # Berkas penataan dari Bootstrap untuk komponen tata letak responsif
@@ -42,7 +42,7 @@ Caelis-main/
 ├── profile.html             # Halaman data diri pengguna yang memuat detail kiriman pribadi
 ├── style.css                # Berkas desainer interior utama yang mengatur pewarnaan, tipografi, dan estetika web
 └── script.js                # Pelayan utama berbasis JavaScript untuk menangani interaksi dinamis dan komunikasi data
-
+```
 ## Cara Menjalankan Aplikasi
 1. Pengguna dapat langsung mengakses web Caelis secara daring tanpa perlu memasang server lokal.
 2. Silakan pindai (scan) kode QR yang tersedia pada PowerPoint presentasi proyek kami.
